@@ -12,6 +12,7 @@
       packages.${system} = {
         clojure = pkgs.callPackage ./clojure.nix {};
         sbcl = pkgs.callPackage ./sbcl.nix {};
+        emacs = pkgs.callPackage ./emacs.nix {};
       };
     };
 
