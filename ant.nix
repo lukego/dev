@@ -1,10 +1,6 @@
-{ pkgs, stdenvNoCC, fetchFromGitHub, ... }:
+{ pkgs, jdk, stdenvNoCC, fetchFromGitHub, ... }:
 
-let
-
-  jdk = pkgs.jdk17;
-
-in stdenvNoCC.mkDerivation rec {
+stdenvNoCC.mkDerivation rec {
   pname = "ant";
   version = "1.10.12";
 

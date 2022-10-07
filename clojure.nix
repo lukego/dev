@@ -1,7 +1,5 @@
-{ pkgs, stdenvNoCC, apacheAnt, fetchFromGitHub, ... }:
+{ pkgs, stdenvNoCC, ant, fetchFromGitHub, jdk, ... }:
 let
-
-  jdk = pkgs.jdk17;
 
   spec = fetchFromGitHub {
     owner = "clojure";
@@ -31,7 +29,7 @@ in stdenvNoCC.mkDerivation rec {
 
   patches = [ ./patches/clojure-build-spec-dependencies.patch ];
 
-  buildInputs = [ apacheAnt jdk ];
+  buildInputs = [ ant jdk ];
 
   buildPhase = ''
     cp -r ${spec}/src/main/clojure/clojure/spec src/clj/clojure

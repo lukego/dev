@@ -10,10 +10,11 @@
       pkgs = nixpkgs.outputs.legacyPackages.${system};
     in {
       packages.${system} = rec {
-        clojure = pkgs.callPackage ./clojure.nix { inherit ant; };
+        jdk = pkgs.jdk17;
+        clojure = pkgs.callPackage ./clojure.nix { inherit jdk ant; };
         sbcl = pkgs.callPackage ./sbcl.nix {};
         emacs = pkgs.callPackage ./emacs.nix {};
-        ant = pkgs.callPackage ./ant.nix {};
+        ant = pkgs.callPackage ./ant.nix { inherit jdk; };
       };
     };
 
