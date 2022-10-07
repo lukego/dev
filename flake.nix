@@ -10,7 +10,7 @@
       pkgs = nixpkgs.outputs.legacyPackages.${system};
     in {
       packages.${system} = {
-        clojure = import ./clojure.nix { inherit pkgs; };
+        clojure = pkgs.callPackage ./clojure.nix {};
       };
     };
 

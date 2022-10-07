@@ -1,0 +1,22 @@
+--- a/build.xml
++++ b/build.xml
+@@ -56,6 +56,7 @@
+        <!--<sysproperty key="clojure.compile.warn-on-reflection" value="true"/>-->
+         <sysproperty key="clojure.compiler.direct-linking" value="true"/>
+       <sysproperty key="java.awt.headless" value="true"/>
++      <sysproperty key="clojure.spec.skip-macros" value="true"/>
+       <arg value="clojure.core"/>
+       <arg value="clojure.core.protocols"/>
+       <arg value="clojure.core.server"/>
+@@ -86,6 +87,9 @@
+       <arg value="clojure.uuid"/>
+       <arg value="clojure.core.reducers"/>
+       <arg value="clojure.math"/>
++      <arg value="clojure.spec.alpha"/>
++      <arg value="clojure.spec.gen.alpha"/>
++      <arg value="clojure.core.specs.alpha"/>
+     </java>
+   </target>
+ 
+
+Diff finished.  Fri Oct  7 20:21:09 2022
