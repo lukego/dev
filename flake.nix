@@ -11,6 +11,7 @@
     in {
       packages.${system} = {
         clojure = pkgs.callPackage ./clojure.nix {};
+        sbcl = pkgs.callPackage ./sbcl.nix {};
       };
     };
 
