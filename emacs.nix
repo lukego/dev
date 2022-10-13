@@ -3,6 +3,7 @@
 let
 
   emacs = pkgs.emacs.override {
+    withGTK3 = true;
     withSQLite3 = true;
     nativeComp = false; # Takes too long
   };
