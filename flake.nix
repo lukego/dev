@@ -15,6 +15,7 @@
         sbcl = pkgs.callPackage ./sbcl.nix {};
         emacs = pkgs.callPackage ./emacs.nix {};
         ant = pkgs.callPackage ./ant.nix { inherit jdk; };
+        fd = pkgs.callPackage ./fd.nix {};
       };
     };
 
