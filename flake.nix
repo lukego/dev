@@ -13,7 +13,7 @@
         jdk = pkgs.jdk17;
         clojure = pkgs.callPackage ./clojure.nix { inherit jdk ant; };
         sbcl = pkgs.callPackage ./sbcl.nix {};
-        emacs = pkgs.callPackage ./emacs.nix {};
+        emacs = pkgs.callPackage ./emacs.nix { inherit sqlite; };
         ant = pkgs.callPackage ./ant.nix { inherit jdk; };
         fd = pkgs.callPackage ./fd.nix {};
         sqlite = pkgs.callPackage ./sqlite.nix {};
