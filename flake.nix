@@ -18,6 +18,7 @@
         fd = pkgs.callPackage ./fd.nix {};
         sqlite = pkgs.callPackage ./sqlite.nix {};
         clasp = pkgs.callPackage ./clasp.nix {};
+        abcl = pkgs.callPackage ./abcl.nix { inherit jdk ant; };
       };
     };
 
