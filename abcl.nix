@@ -20,6 +20,7 @@ stdenvNoCC.mkDerivation rec {
 
   patches = [
     ./patches/abcl-fix-runtime-class-annotations.patch
+    ./patches/abcl-fix-gray-stream-element-type-binary.patch
   ];
   
   javaOpts =
