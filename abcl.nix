@@ -10,10 +10,14 @@ stdenvNoCC.mkDerivation rec {
   };
   
   buildInputs = [ ant jdk hostname makeWrapper ];
-  
+
+  modules = import ./jdk-modules.nix;
+
+  openFlags = map (x: "--add-opens=java.base/${x}=ALL-UNNAMED") modules;
+
   buildPhase = ''
     ant \
-      -Djava.options="${javaOpts}" \
+      -Djava.options="${lib.concatStringsSep " " openFlags}" \
       -Dabcl.runtime.jar.path="$out/share/java/abcl.jar" \
       -Dadditional.jars="$out/share/java/abcl-contrib.jar"
   '';
@@ -23,10 +27,13 @@ stdenvNoCC.mkDerivation rec {
     ./patches/abcl-fix-gray-stream-element-type-binary.patch
   ];
   
-  javaOpts =
-    lib.optionalString
+  javaOpts = [
+    "\$JAVA_OPTS"
+    "--add-opens=java.base=ALL"
+    (lib.optionalString
       (lib.versionAtLeast jdk.version "17")
-      "--add-opens=java.base/java.util.jar=ALL-UNNAMED";
+      "--add-opens=java.base/java.util.jar=ALL-UNNAMED")
+  ];
 
   installPhase = ''
     mkdir -pv $out/share/java
