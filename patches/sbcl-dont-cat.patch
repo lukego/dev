@@ -1,0 +1,30 @@
+--- a/contrib/make-contrib.lisp
++++ b/contrib/make-contrib.lisp
+@@ -115,12 +115,21 @@
+                              :direction :output :if-exists :supersede
+                              :if-does-not-exist :create)
+           (format asd "(defsystem :~A :class require-system)~%" *system*))
+-        (sb-sys:os-exit
+-         (process-status
+-          (run-program #+unix "/bin/cat" #-unix "cat" outputs
+-                       ;; probably is /usr/bin/cat.exe but let's not assume that
+-                       #-unix :search #-unix t
+-                       :output joined :if-output-exists :supersede)))))))
++        (cat outputs joined)))))
++
++(defun cat (inputs output)
++  (with-open-file (out output :element-type '(unsigned-byte 8)
++                              :direction :output
++                              :if-exists :supersede
++                              :if-does-not-exist :create)
++    (dolist (pathname inputs)
++      (with-open-file (in pathname :element-type '(unsigned-byte 8))
++        (let ((buffer (make-array 4096 :element-type '(unsigned-byte 8))))
++          (declare (dynamic-extent buffer))
++          (loop with length = (file-length in)
++                for position = (read-sequence buffer in)
++                while (plusp position)
++                do (write-sequence buffer out :end position)))))))
+ 
+ (compile 'perform)
+ (let ((form (with-open-file (f (format nil "~A.asd" *system*))
