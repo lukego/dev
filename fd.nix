@@ -2,15 +2,15 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "fd";
-  version = "8.4.0";
+  version = "8.5.1-kaspi";
 
   src = fetchFromGitHub {
     owner = "uthar";
     repo = "fd";
-    rev = "c40968298070a6397abcd0bba95a94f06b8d70ac";
-    sha256 = "0a92b2szif7qfsb5bj57bx544hzf8nyb6qgqmh34aip2z75j5hpv";
+    rev = "731a1361e7eb55d4dbc76e549ca611d29ca521f3";
+    sha256 = "sha256-Pzox4TJubWQL4Ew8NazsgTYgSv0bR3akUNcexKAEXVw";
   };
 
-  cargoSha256 = "1r7pcigfd5zjgh3f2yab4skrqvk8l3asrhxj34yy5v7v8j7hlmsp";
+  cargoSha256 = "sha256-dhmpc3HYHRLO3r37m/vWkX77Xe7oiwYCqBTnNFx5Mlo";
 
 }
