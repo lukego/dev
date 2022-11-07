@@ -3,11 +3,13 @@
   description = "Development environment";
 
   inputs.nixpkgs.url = "nixpkgs";
+  inputs.nix.url = "nix/2.11.1";
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, nix }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.outputs.legacyPackages.${system};
+      nix-pkg = nix.packages.${system}.default;
     in {
       packages.${system} = rec {
         jdk = pkgs.jdk17;
@@ -21,6 +23,7 @@
         clasp = pkgs.callPackage ./clasp.nix {};
         abcl = pkgs.callPackage ./abcl.nix { inherit jdk ant; };
         openssl_1_0_0 = pkgs.callPackage ./openssl_1_0_0.nix {};
+        nix = pkgs.callPackage ./nix.nix { nix = nix-pkg; };
       };
     };
 
