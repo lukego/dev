@@ -20,6 +20,7 @@
         fossil = pkgs.callPackage ./fossil.nix { inherit sqlite; };
         clasp = pkgs.callPackage ./clasp.nix {};
         abcl = pkgs.callPackage ./abcl.nix { inherit jdk ant; };
+        openssl_1_0_0 = pkgs.callPackage ./openssl_1_0_0.nix {};
       };
     };
 
