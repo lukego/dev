@@ -3,12 +3,12 @@
 stdenvNoCC.mkDerivation rec {
   pname = "abcl";
   version = "1.9.0";
-  
+
   src = fetchurl {
     url = "https://abcl.org/releases/${version}/abcl-src-${version}.tar.gz";
     sha256 = "sha256-oStchPKINL2Yjjra4K0q1MxsRR2eRPPAhT0AcVjBmGk=";
   };
-  
+
   buildInputs = [ ant jdk hostname makeWrapper ];
 
   modules = import ./jdk-modules.nix;
@@ -23,10 +23,12 @@ stdenvNoCC.mkDerivation rec {
   '';
 
   patches = [
-    ./patches/abcl-fix-runtime-class-annotations.patch
-    ./patches/abcl-fix-gray-stream-element-type-binary.patch
+    ./patches/abcl-runtime-class-annotations.patch
+    ./patches/abcl-runtime-class-array-types.patch
+    ./patches/abcl-runtime-class-super-calls.patch
+    ./patches/abcl-gray-streams-element-type-binary.patch
   ];
-  
+
   javaOpts = [
     "\$JAVA_OPTS"
     "--add-opens=java.base=ALL"
