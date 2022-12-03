@@ -4,16 +4,19 @@
 
   inputs.nixpkgs.url = "nixpkgs";
   inputs.nix.url = "nix/2.11.1";
+  inputs.nix-clj.url = "github:uthar/nix-clj";
 
-  outputs = { self, flake-utils, nixpkgs, nix }:
+  outputs = { self, flake-utils, nixpkgs, nix, nix-clj }:
     flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.outputs.legacyPackages.${system};
       nix-pkg = nix.packages.${system}.default;
+      cljpkgs = nix-clj.packages.${system};
     in {
       packages = rec {
         jdk = pkgs.jdk17;
         clojure = pkgs.callPackage ./clojure.nix { inherit jdk ant; };
+        cider = pkgs.callPackage ./cider.nix { inherit cljpkgs; };
         sbcl = pkgs.callPackage ./sbcl.nix {};
         emacs = pkgs.callPackage ./emacs.nix { inherit sqlite; };
         ant = pkgs.callPackage ./ant.nix { inherit jdk; };
