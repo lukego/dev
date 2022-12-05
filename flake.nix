@@ -2,7 +2,7 @@
 
   description = "Development environment";
 
-  inputs.nixpkgs.url = "nixpkgs";
+  inputs.nixpkgs.url = "github:lukego/nixpkgs/shaderc-2022.4";
   inputs.nix.url = "nix/2.11.1";
   inputs.nix-clj.url = "github:uthar/nix-clj";
 
